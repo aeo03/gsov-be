@@ -3,6 +3,9 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routers/userRouter.js';
+import productRouter from './routers/productRouter.js';
+import customerRouter from './routers/customerRouter.js';
+import orderRouter from './routers/orderRouter.js';
 
 dotenv.config();
 const app = express();
@@ -27,6 +30,9 @@ const connectDB = async () => {
 
 connectDB();
 app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/customers', customerRouter);
+app.use('/api/orders', orderRouter);
 
 const port = process.env.PORT || 5000;
 app.get('/', (req, res) => {
