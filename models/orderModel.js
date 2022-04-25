@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema(
     {
         date: { type: Date },
         customerNumber: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer' },
-        productNumber: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
+        userNumber: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     },
     { timestamp: true },
 );

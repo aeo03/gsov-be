@@ -19,6 +19,7 @@ userRouter.post(
             customers.push(createdCustomer);
         }
         res.send({ message: 'Customer Created', customer: customers });
+        console.log('Customer ' + customers._id + ' created  at ' + new Date().toISOString())
     }),
 );
 
