@@ -1,24 +1,10 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import bcrypt from 'bcryptjs';
-import User from '../models/userModel.js';
 import { generateToken } from '../utils.js';
+import User from '../models/userModel.js';
 
 const userRouter = express.Router();
-
-userRouter.post(
-    '/add-user',
-    expressAsyncHandler(async (req, res) => {
-        const user = new User({
-            name: req.body.name,
-            password: bcrypt.hashSync(req.body.password, 8),
-            hiredDate: new Date().toISOString(),
-        });
-        const createdUser = await user.save();
-        res.send({ message: 'User Created', user: createdUser });
-        console.log('User ' + createdUser._id + ' Created at ' + new Date().toISOString())
-    }),
-);
 
 userRouter.post(
     '/login',
@@ -29,13 +15,33 @@ userRouter.post(
                 res.send({
                     _id: user._id,
                     name: user.name,
+                    email: user.email,
                     token: generateToken(user),
                 });
-                console.log('User ' + user._id + ' logged in at ' + new Date().toISOString())
                 return;
             }
         }
         res.status(401).send({ message: 'Invalid email or password' });
+    }),
+);
+
+userRouter.post(
+    '/add-user',
+    expressAsyncHandler(async (req, res) => {
+      const user = await User.findOne({name:req.body.name})
+      console.log("isUserExists",user)
+      if(!user){
+        const newUser = new User({
+            name: req.body.name,
+            password: bcrypt.hashSync(req.body.password, 8),
+            hiredDate: new Date().toISOString(),
+        });
+        const createdUser = await newUser.save();
+        res.status(201).send({ message: 'User Created', user: createdUser });
+      }
+      else{
+        res.status(400).send({ message: 'User is already in use' });
+      }
     }),
 );
 

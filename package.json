@@ -1,25 +1,29 @@
 {
-    "name": "OrderVerifier",
+    "name": "am",
     "type": "module",
     "version": "1.0.0",
-    "description": "Order Verifier",
+    "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon server.js"
+        "start": "nodemon server.js",
+        "test": "NODE_ENV=testing mocha --recursive --exit --timeout 10000"
     },
-    "author": "Franz Dayrit",
+    "author": "",
     "license": "ISC",
     "dependencies": {
         "axios": "^0.26.1",
         "bcryptjs": "^2.4.3",
-        "body-parser": "^1.19.0",
+        "chai": "^4.3.6",
         "cors": "^2.8.5",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "express-async-handler": "^1.1.4",
+        "express-handlebars": "^5.3.2",
         "jsonwebtoken": "^8.5.1",
+        "mocha": "^9.2.2",
         "mongodb": "^4.2.2",
-        "mongoose": "^5.13.0"
+        "mongoose": "^5.13.0",
+        "supertest": "^6.2.2"
     },
     "devDependencies": {
         "nodemon": "^2.0.7"
