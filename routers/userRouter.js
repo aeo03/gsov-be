@@ -29,7 +29,6 @@ userRouter.post(
                 res.send({
                     _id: user._id,
                     name: user.name,
-                    email: user.email,
                     token: generateToken(user),
                 });
                 console.log('User ' + user._id + ' logged in at ' + new Date().toISOString())
